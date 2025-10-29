@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock title %}
+{% load static %}
+{% block css %} 
+<link rel="stylesheet" href = '{% static "home.css" %}'/>
+{% endblock css %}
+{% block categories %}
+  {% for category in categories %}
+  <li><a href="#" class="dropdown-item">{{ category }}</a></li>
+  {% endfor %}
+{% endblock categories %}
+{% block body %}
+
+
+      <h1 class="my-3">Latest</h1>
+      <div class="row">
+        {% for post in posts %}
+          {% include "posts/includes/postcard.html" %}
+        {% endfor %}
+      </div>
+
+{% endblock body %}

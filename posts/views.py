@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
-from django.urls import reverse
+from django.http import HttpResponseNotFound, Http404
 # Create your views here.
 
 blog_posts = [
@@ -27,14 +26,7 @@ blog_posts = [
 ]
 
 def home(request):
-    html = ""
-    for post in blog_posts:
-        html += f'''
-            <div>
-            <a href = '{post['id']}'> {post['title']}</h1>
-            </div>
-'''
-    return HttpResponse(html)
+    return render(request, "posts/index.html", {"posts": blog_posts})
 
 def post(request, id):
     data = None
@@ -45,10 +37,6 @@ def post(request, id):
             break 
 
     if not data:
-        return HttpResponseNotFound("<h1 style='color:red;'> Not found</h1>")
+        raise Http404
     
-    return HttpResponse(f'<h1>{data["title"]}</h1><p>{data["content"]}</p>')
-
-def google(request, id):
-    url = reverse('post', args=[id])
-    return HttpResponseRedirect(url)
+    return render(request, "posts/posts.html", {"post": data})

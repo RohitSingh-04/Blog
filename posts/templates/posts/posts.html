@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %} Posts {% endblock title %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href = "{% static 'posts.css' %}"/>
+{% endblock css %}
+{% block categories %}
+  {% for category in categories %}
+  <li><a href="#" class="dropdown-item">{{ category }}</a></li>
+  {% endfor %}
+{% endblock categories %}
+{% block body %}
+      
+      <div class="content d-flex flex-column">
+        <img src="" alt="" class="text-center">
+        <div class="h5 text-center text-body-secondary">25th January 2024</div>
+        <h1 class="text-center fs-1 fw-bold my-3">{{ post.title }}</h1>
+        <div class="d-flex justify-content-center align-items-center flex-wrap">
+            <a href="" class="btn btn-dark opacity-70 text-light m-2">#Python</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#Python</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#datastrucutres & algorithm</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#programming</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#software developers</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#Travel</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#Food</a>
+        </div>
+        <hr class="border border-dark border-1 opacity-50">
+        <p>
+          {{ post.content }}
+        </p>
+      </div>
+      <h2>Comments</h2>
+      <form method="post">
+        <textarea name="" id="" class="form-control"></textarea>
+        <button type="submit" class="btn btn-primary">Comment</button>
+      </form>
+      <h2 class="bg-danger">Login To Comment</h2>
+
+      <div class="card m-2">
+        <div class="card-body">
+            <div class="row g-0">
+                <div class="col"><img src="https://static.vecteezy.com/system/resources/previews/000/550/980/non_2x/user-icon-vector.jpg" alt="..." class="w-25 img-thumbnail rounded-circle"></div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Username</h5>
+                        <p class="card-text">Comment from the user </p>
+                        <p class="card-text"><small class="text-body-secondary">Last updated3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+{% endblock body %}
