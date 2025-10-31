@@ -1,0 +1,7 @@
+makemigrations
+
+sqlmigrate app_name 0001
+
+migrate 
+
+showmigrations
