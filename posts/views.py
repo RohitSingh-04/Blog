@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound, Http404
+from .models import Post
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 blog_posts = [
@@ -26,17 +28,16 @@ blog_posts = [
 ]
 
 def home(request):
+    blog_posts = Post.objects.all()
     return render(request, "posts/index.html", {"posts": blog_posts})
 
 def post(request, id):
-    data = None
 
-    for posts in blog_posts:
-        if posts['id'] == id:
-            data = posts
-            break 
+    # try:
+    #     data = Post.objects.get(id = id)
+    # except Post.DoesNotExist:
+    #     raise Http404()
 
-    if not data:
-        raise Http404
+    data = get_object_or_404(Post, id = id)
     
     return render(request, "posts/posts.html", {"post": data})

@@ -14,14 +14,14 @@
       
       <div class="content d-flex flex-column">
         <img src="" alt="" class="text-center">
-        <div class="h5 text-center text-body-secondary">25th January 2024</div>
-        <h1 class="text-center fs-1 fw-bold my-3">{{ post.title }}</h1>
+        <div class="h5 text-center text-body-secondary">{{ post.publish_date }}</div>
+        <h1 class="text-center fs-1 fw-bold my-3">{{ post.post_title }}</h1>
         <div class="d-flex justify-content-center align-items-center flex-wrap">
             <a href="" class="btn btn-dark opacity-70 text-light m-2">#Python</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#Python</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#datastrucutres & algorithm</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#programming</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#software developers</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#Travel</a><a href="" class="btn btn-dark opacity-70 text-light m-2">#Food</a>
         </div>
         <hr class="border border-dark border-1 opacity-50">
         <p>
-          {{ post.content }}
+          {{ post.post_content }}
         </p>
       </div>
       <h2>Comments</h2>
