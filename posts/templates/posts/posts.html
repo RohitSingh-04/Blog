@@ -26,8 +26,9 @@
       </div>
       <h2>Comments</h2>
       <form method="post">
-        <textarea name="" id="" class="form-control"></textarea>
-        <button type="submit" class="btn btn-primary">Comment</button>
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Comment" class="btn btn-primary">
       </form>
       <h2 class="bg-danger">Login To Comment</h2>
 

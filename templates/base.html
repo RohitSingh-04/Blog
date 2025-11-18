@@ -64,10 +64,17 @@
               <input type="text" class="form-control me1" />
               <button class="btn btn-outline-dark">Search</button>
             </form>
-            <a href="" class="btn btn-dark m2">Login</a>
-            <a href="" class="btn btn-dark m2">Create Account</a>
-            <h2 style="font-size: 20px; margin: 5px">Username</h2>
-            <a href="" class="btn btn-dark m-3"></a>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'user_login' %}" class="btn btn-dark m2">Login</a>
+            <a href="{% url 'user_register' %}" class="btn btn-dark m2">Create Account</a>
+              
+            {% else %}
+              
+              <h2 style="font-size: 20px; margin: 5px">{{ user.username }}</h2>
+              
+              <a href="{% url 'user_logout' %}" class="btn btn-dark m2">Logout</a>
+            {% endif %}
+
           </div>
         </div>
       </nav>
@@ -77,20 +84,7 @@
       {% endblock body %}
 
     
-      <div class="container d-flex justify-content-center">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item"><a href="" class="page-link">Previous</a></li>
-            <li class="page-item"><a href="" class="page-link">1</a></li>
-            <li class="page-item active">
-              <a href="#" class="page-link">2</a>
-            </li>
-            <li class="page-item"><a href="" class="page-link">3</a></li>
-            <li class="page-item"><a href="" class="page-link">Next</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+      
     <footer class="container py-3">
         <hr class="border border-dark border-2 opacity-50">
         <div class="row d-flex justify-content-center">

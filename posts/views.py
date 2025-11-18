@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponseNotFound, Http404
-from .models import Post
+from django.http import HttpResponseNotFound, Http404, HttpResponseRedirect
+from .models import Post, Comment
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
+from .forms import CommentForm
+from django.urls import reverse
 # Create your views here.
 
 blog_posts = [
@@ -28,16 +31,29 @@ blog_posts = [
 ]
 
 def home(request):
-    blog_posts = Post.objects.all()
-    return render(request, "posts/index.html", {"posts": blog_posts})
+    blog_posts = Post.objects.all().order_by('-id')
+    paginator = Paginator(blog_posts, 2)
+    page_number = request.GET.get("p", 1)
+    page_obj = paginator.get_page(page_number)
+    return render(request, "posts/index.html", {"posts": page_obj})
 
 def post(request, id):
+    data = get_object_or_404(Post, id = id)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit = False)
+            comment.post = data
+            comment.save()
+            posturl = reverse('post', args=[id])
+            return HttpResponseRedirect(posturl)
 
     # try:
     #     data = Post.objects.get(id = id)
     # except Post.DoesNotExist:
     #     raise Http404()
 
-    data = get_object_or_404(Post, id = id)
+    form = CommentForm()
     
-    return render(request, "posts/posts.html", {"post": data})
+    return render(request, "posts/posts.html", {"post": data, 'form': form})
